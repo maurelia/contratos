@@ -1,4 +1,4 @@
-# Contratos
+# NexOre ContractMineOre
 
 Auto generador de contratos.
 
