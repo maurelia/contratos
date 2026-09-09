@@ -1,0 +1,1171 @@
+<title>Relaves Cu·Au·Ag</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f6f2ea;
+  --surface:#fffdfa;
+  --surface-2:#efe6d8;
+  --surface-3:#e5d9c6;
+  --border:#ddccb2;
+  --ink:#241e15;
+  --ink-soft:#5a4d3b;
+  --muted:#8a7a61;
+  --accent:#a85527;
+  --accent-ink:#fff8f0;
+  --accent-soft:#f1ded0;
+  --gold:#8a6a1f;
+  --gold-soft:#f2e6c4;
+  --silver:#4f6672;
+  --silver-soft:#e2ebee;
+  --good:#3d7a4e;
+  --good-soft:#e2eee2;
+  --danger:#9c3b2c;
+  --danger-soft:#f3e1db;
+  --focus:#a85527;
+  --shadow: 0 1px 2px rgba(36,30,21,.06), 0 8px 24px -12px rgba(36,30,21,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17140f;
+    --surface:#211c15;
+    --surface-2:#2a2319;
+    --surface-3:#362d1f;
+    --border:#463a26;
+    --ink:#f3ecdd;
+    --ink-soft:#cdbfa2;
+    --muted:#94856a;
+    --accent:#e08a54;
+    --accent-ink:#221408;
+    --accent-soft:#3a2416;
+    --gold:#d8b45c;
+    --gold-soft:#382f14;
+    --silver:#9db3bf;
+    --silver-soft:#1c2a30;
+    --good:#7cc492;
+    --good-soft:#193321;
+    --danger:#e3927e;
+    --danger-soft:#3a1e18;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#17140f;
+  --surface:#211c15;
+  --surface-2:#2a2319;
+  --surface-3:#362d1f;
+  --border:#463a26;
+  --ink:#f3ecdd;
+  --ink-soft:#cdbfa2;
+  --muted:#94856a;
+  --accent:#e08a54;
+  --accent-ink:#221408;
+  --accent-soft:#3a2416;
+  --gold:#d8b45c;
+  --gold-soft:#382f14;
+  --silver:#9db3bf;
+  --silver-soft:#1c2a30;
+  --good:#7cc492;
+  --good-soft:#193321;
+  --danger:#e3927e;
+  --danger-soft:#3a1e18;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'IBM Plex Sans',ui-sans-serif,system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+}
+h1,h2,h3{text-wrap:balance}
+::selection{background:var(--accent-soft)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.serif{font-family:'Source Serif 4',Georgia,serif}
+
+/* ---------- header ---------- */
+header.top{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  padding:14px clamp(14px,3vw,32px);
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:240px}
+.brand .eyebrow{
+  font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;
+}
+.brand h1{margin:0;font-size:19px;font-weight:700;font-family:'Source Serif 4',serif;letter-spacing:.01em}
+.brand .metals{display:inline-flex;gap:6px;margin-top:2px}
+.tag{
+  display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;
+  padding:2px 7px;border-radius:99px;letter-spacing:.02em;
+}
+.tag.cu{background:var(--accent-soft);color:var(--accent)}
+.tag.au{background:var(--gold-soft);color:var(--gold)}
+.tag.ag{background:var(--silver-soft);color:var(--silver)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+button.btn{
+  font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--ink);
+  padding:8px 14px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+  box-shadow:var(--shadow);transition:transform .08s ease, border-color .15s ease;
+}
+button.btn:hover{border-color:var(--accent)}
+button.btn:active{transform:translateY(1px)}
+button.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button.btn.ghost{box-shadow:none}
+button.btn.small{padding:5px 10px;font-size:12px}
+
+/* ---------- layout ---------- */
+.app{max-width:1320px;margin:0 auto;padding:20px clamp(14px,3vw,32px) 80px}
+.app-grid{display:grid;grid-template-columns:minmax(300px,360px) 1fr;gap:20px;align-items:start}
+@media (max-width:920px){.app-grid{grid-template-columns:1fr}}
+
+.panel{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.panel-head{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+}
+.panel-head h2{margin:0;font-size:15px;font-weight:700;font-family:'Source Serif 4',serif}
+.panel-head .hint{font-size:11.5px;color:var(--muted)}
+.panel-body{padding:14px 16px}
+
+#params-panel{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+
+details.acc{border-bottom:1px solid var(--border)}
+details.acc:last-child{border-bottom:none}
+details.acc summary{
+  list-style:none;cursor:pointer;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;
+  font-weight:600;font-size:13px;color:var(--ink-soft);user-select:none;
+}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary .chev{transition:transform .15s ease;color:var(--muted);font-size:12px}
+details.acc[open] summary .chev{transform:rotate(90deg)}
+details.acc summary:hover{color:var(--ink)}
+.acc-body{padding:2px 16px 16px}
+.acc-note{font-size:11.5px;color:var(--muted);margin:0 0 10px;line-height:1.45}
+
+.field{display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+.field label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.field input[type=text],.field input[type=number]{
+  font:inherit;font-family:'IBM Plex Mono',monospace;font-size:13px;
+  padding:7px 9px;border:1px solid var(--border);border-radius:7px;background:var(--surface-2);color:var(--ink);width:100%;
+}
+.field input:focus{background:var(--surface)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.subhead{font-size:12px;font-weight:700;color:var(--ink);margin:14px 0 8px;padding-top:10px;border-top:1px dashed var(--border)}
+.subhead:first-child{border-top:none;padding-top:0;margin-top:2px}
+
+.grid-table{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.grid-row{display:grid;grid-template-columns:1fr 1fr auto auto;gap:6px;align-items:center}
+.grid-row.noreject{grid-template-columns:1fr 1fr auto}
+.grid-row input{font-family:'IBM Plex Mono',monospace;font-size:12.5px;padding:6px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface-2);color:var(--ink);width:100%}
+.chk{display:flex;align-items:center;justify-content:center;width:30px;height:30px}
+.chk input{width:16px;height:16px;accent-color:var(--danger)}
+.rm{
+  width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:var(--surface);
+  color:var(--muted);cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;
+}
+.rm:hover{color:var(--danger);border-color:var(--danger)}
+.col-labels{display:grid;grid-template-columns:1fr 1fr auto auto;gap:6px;font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:2px}
+.col-labels.noreject{grid-template-columns:1fr 1fr auto}
+.addrow{
+  font-size:12px;font-weight:600;color:var(--accent);background:none;border:1px dashed var(--border);
+  border-radius:7px;padding:6px 10px;cursor:pointer;width:100%;margin-top:2px;
+}
+.addrow:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+/* ---------- calculator ---------- */
+.calc-inputs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:6px}
+@media (max-width:920px){.calc-inputs{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:520px){.calc-inputs{grid-template-columns:1fr 1fr}}
+.total-note{font-size:11.5px;color:var(--muted);margin:-2px 0 16px}
+.calc-field{display:flex;flex-direction:column;gap:4px}
+.calc-field label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.02em}
+.calc-field .unit-input{position:relative}
+.calc-field input{
+  width:100%;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;
+  padding:9px 46px 9px 10px;border:1.5px solid var(--border);border-radius:9px;background:var(--surface-2);color:var(--ink);
+}
+.calc-field input:focus{border-color:var(--accent);background:var(--surface)}
+.calc-field .unit{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--muted);font-weight:600}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tile{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 13px;
+  display:flex;flex-direction:column;gap:3px;min-height:78px;justify-content:center;
+}
+.tile .k{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.tile .v{font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;color:var(--ink)}
+.tile .v small{font-size:12px;font-weight:500;color:var(--muted)}
+.tile .sub{font-size:11px;color:var(--muted);line-height:1.35}
+.tile.accent{background:var(--accent-soft);border-color:transparent}
+.tile.accent .v{color:var(--accent)}
+.tile.gold-t{background:var(--gold-soft);border-color:transparent}
+.tile.gold-t .v{color:var(--gold)}
+.tile.silver-t{background:var(--silver-soft);border-color:transparent}
+.tile.silver-t .v{color:var(--silver)}
+.tile.good{background:var(--good-soft);border-color:transparent}
+.tile.good .v{color:var(--good)}
+.tile.danger{background:var(--danger-soft);border-color:transparent}
+.tile.danger .v{color:var(--danger)}
+.tile.big{grid-column:span 2}
+@media (max-width:520px){.tile.big{grid-column:span 1}}
+
+.section-gap{height:16px}
+.small-note{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+.storage-note{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.storage-note .dot{width:6px;height:6px;border-radius:99px;background:var(--good)}
+
+/* ---------- contract document ---------- */
+#contract-doc{
+  font-family:'Source Serif 4',Georgia,serif;color:var(--ink);line-height:1.68;font-size:14.5px;
+  max-width:74ch;margin:0 auto;
+}
+#contract-doc h3.doc-title{
+  text-align:center;font-size:19px;font-weight:700;margin:0 0 4px;letter-spacing:.01em;
+}
+#contract-doc .doc-meta{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);margin-bottom:26px}
+#contract-doc p{margin:0 0 14px}
+#contract-doc .clause-title{font-weight:700;margin:22px 0 8px;font-size:15px}
+#contract-doc .party{font-weight:600}
+#contract-doc table.doc-table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-family:'IBM Plex Mono',monospace;font-size:12.5px}
+#contract-doc table.doc-table th,#contract-doc table.doc-table td{border:1px solid var(--border);padding:6px 9px;text-align:left}
+#contract-doc table.doc-table th{background:var(--surface-2);font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.02em}
+#contract-doc table.doc-table td.num{text-align:right}
+#contract-doc .formula{
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:8px;padding:9px 12px;margin:4px 0 16px;
+}
+#contract-doc .sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:56px;text-align:center}
+#contract-doc .sig-line{border-top:1px solid var(--ink);padding-top:8px;font-weight:600;font-size:12px}
+#contract-doc .doc-footer{text-align:center;font-size:11px;color:var(--muted);margin-top:30px;padding-top:14px;border-top:1px dashed var(--border)}
+mark.fill{background:none;color:var(--accent);font-weight:600}
+
+/* ---------- print ---------- */
+@media print{
+  .no-print{display:none !important}
+  header.top{position:static;backdrop-filter:none}
+  .app-grid{display:block}
+  #params-panel,.panel:not(#doc-panel){display:none}
+  #doc-panel{border:none;box-shadow:none;border-radius:0}
+  body{background:#fff;font-size:12px}
+  #contract-doc{max-width:100%}
+}
+</style>
+
+<header class="top">
+  <div class="brand">
+    <span class="eyebrow">Modelo Copiapó · borrador de trabajo</span>
+    <h1>Contrato de compraventa de relaves</h1>
+    <span class="metals">
+      <span class="tag cu">Cu %</span>
+      <span class="tag au">Au g/t</span>
+      <span class="tag ag">Ag g/t</span>
+    </span>
+  </div>
+  <div class="top-actions no-print">
+    <button class="btn ghost small" id="btn-reset" title="Restablecer valores por defecto">↺ Restablecer</button>
+    <button class="btn" id="btn-copy">⧉ Copiar contrato</button>
+    <button class="btn primary" id="btn-print">🖨 Imprimir / Guardar PDF</button>
+  </div>
+</header>
+
+<div class="app">
+  <p class="small-note no-print" style="margin:-4px 0 18px;max-width:74ch">
+    Ajusta las partes, las tablas de precio y las cláusulas en el panel izquierdo — el documento y la calculadora
+    se recalculan al instante. Incluye ahora la <strong>Tabla C (ley de plata, g/t)</strong> junto a cobre y oro.
+    Borrador de trabajo, no constituye asesoría legal.
+  </p>
+
+  <div class="app-grid">
+    <!-- ================= LEFT: PARAMETER PANEL ================= -->
+    <aside class="panel no-print" id="params-panel">
+      <div class="panel-head"><h2>Ficha de parámetros</h2></div>
+
+      <details class="acc" open>
+        <summary>Partes del contrato <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field">
+            <label>Ciudad de firma</label>
+            <input type="text" data-path="general.ciudad" placeholder="Copiapó">
+          </div>
+          <div class="field">
+            <label>Fecha del contrato</label>
+            <input type="text" data-path="general.fecha" placeholder="[fecha]">
+          </div>
+
+          <div class="subhead">El Vendedor</div>
+          <div class="field"><label>Razón social</label><input type="text" data-path="vendedor.razonSocial" placeholder="Sociedad XXXX Ltda."></div>
+          <div class="field"><label>RUT</label><input type="text" data-path="vendedor.rut" placeholder="76.xxx.xxx-x"></div>
+          <div class="field"><label>Representante</label><input type="text" data-path="vendedor.representante" placeholder="Nombre completo"></div>
+          <div class="field"><label>Domicilio</label><input type="text" data-path="vendedor.domicilio" placeholder="Calle, comuna, ciudad"></div>
+          <div class="field"><label>Cédula representante</label><input type="text" data-path="vendedor.cedula" placeholder="12.xxx.xxx-x"></div>
+          <div class="field"><label>Instrumento</label><input type="text" data-path="vendedor.instrumento" placeholder="Escritura pública..."></div>
+
+          <div class="subhead">El Comprador</div>
+          <div class="field"><label>Razón social</label><input type="text" data-path="comprador.razonSocial" placeholder="Sociedad XXXX Ltda."></div>
+          <div class="field"><label>RUT</label><input type="text" data-path="comprador.rut" placeholder="76.xxx.xxx-x"></div>
+          <div class="field"><label>Representante</label><input type="text" data-path="comprador.representante" placeholder="Nombre completo"></div>
+          <div class="field"><label>Domicilio</label><input type="text" data-path="comprador.domicilio" placeholder="Calle, comuna, ciudad"></div>
+          <div class="field"><label>Cédula representante</label><input type="text" data-path="comprador.cedula" placeholder="12.xxx.xxx-x"></div>
+          <div class="field"><label>Instrumento</label><input type="text" data-path="comprador.instrumento" placeholder="Escritura pública..."></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Antecedentes y relaves <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field"><label>Ubicación del acopio</label><input type="text" data-path="antecedentes.ubicacion" placeholder="[ubicación]"></div>
+          <div class="field"><label>Región</label><input type="text" data-path="antecedentes.region" placeholder="Región de Atacama"></div>
+          <p class="acc-note">El cobre se declara separado en insoluble (sulfuros: calcopirita, calcosina, covelina —
+          no reacciona al ácido sulfúrico diluido) y soluble (óxidos y especies solubles en ácido: crisocola,
+          malaquita, atacamita — ensayo CuS por lixiviación ácida). Esta razón CuS/CuT determina cuánto de ese
+          cobre es recuperable por flotación (ver "Margen del comprador").</p>
+          <div class="field-row">
+            <div class="field"><label>Ley Cu insoluble decl. (%)</label><input type="number" step="0.01" data-path="antecedentes.leyCuInsolDecl"></div>
+            <div class="field"><label>Ley Cu soluble decl. (%)</label><input type="number" step="0.01" data-path="antecedentes.leyCuSolDecl"></div>
+          </div>
+          <p class="acc-note" id="ley-cu-total-note"></p>
+          <div class="field-row">
+            <div class="field"><label>Ley Au declarada (g/t)</label><input type="number" step="0.01" data-path="antecedentes.leyAuDecl"></div>
+            <div class="field"><label>Ley Ag declarada (g/t)</label><input type="number" step="0.01" data-path="antecedentes.leyAgDecl"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Cubicación <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field-row">
+            <div class="field"><label>Toneladas referenciales</label><input type="number" step="1" data-path="cubicacion.toneladas"></div>
+            <div class="field"><label>Tolerancia (%)</label><input type="number" step="0.1" data-path="cubicacion.tolerancia"></div>
+          </div>
+          <div class="field"><label>Fecha del levantamiento</label><input type="text" data-path="cubicacion.fechaEstudio" placeholder="[fecha]"></div>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>Tabla A — precio base según Cu <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Ley mínima del tramo (%) y precio en US$/TMS. Marca "rechazo" para el tramo bajo el cual no se compra.</p>
+          <div class="col-labels"><span>Ley Cu ≥ (%)</span><span>Precio US$/TMS</span><span>Rechazo</span><span></span></div>
+          <div class="grid-table" id="tabla-a"></div>
+          <button class="addrow" data-add="tablaA">+ Agregar tramo</button>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Tabla B — ajuste según Au <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Ley mínima del tramo (g/t) y ajuste en US$/TMS (puede ser negativo).</p>
+          <div class="col-labels noreject"><span>Ley Au ≥ (g/t)</span><span>Ajuste US$/TMS</span><span></span></div>
+          <div class="grid-table" id="tabla-b"></div>
+          <button class="addrow" data-add="tablaB">+ Agregar tramo</button>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>Tabla C — ajuste según Ag <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Ley mínima del tramo (g/t) y ajuste en US$/TMS. Misma lógica que la Tabla B, aplicada a plata.</p>
+          <div class="col-labels noreject"><span>Ley Ag ≥ (g/t)</span><span>Ajuste US$/TMS</span><span></span></div>
+          <div class="grid-table" id="tabla-c"></div>
+          <button class="addrow" data-add="tablaC">+ Agregar tramo</button>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Margen del comprador (netback) <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Usa la ley Cu/Au/Ag que pusiste en la calculadora de despacho como base. Ajusta estos supuestos a tu planta real.</p>
+
+          <div class="subhead">Metalurgia y payability</div>
+          <p class="acc-note">La flotación recupera el cobre insoluble (sulfuros) muy por encima del cobre soluble
+          (óxidos): calcosina y covelina flotan sobre 85–95%; crisocola/malaquita/atacamita, con superficies muy
+          hidrofílicas, suelen quedar entre 20–50% incluso con sulfidización con NaSH (un ensayo de planta
+          Salvador-CODELCO subió la recuperación de Cu soluble solo 21 puntos con sulfidizante). Valores por
+          defecto orientativos — ajústalos a tus propios ensayos de flotabilidad. Fuentes al pie del documento.</p>
+          <div class="field-row">
+            <div class="field"><label>Recuperación Cu insoluble (%)</label><input type="number" step="0.1" data-path="margen.recCuInsol"></div>
+            <div class="field"><label>Recuperación Cu soluble (%)</label><input type="number" step="0.1" data-path="margen.recCuSol"></div>
+          </div>
+          <div class="field"><label>Payability Cu (%)</label><input type="number" step="0.1" data-path="margen.payCu"></div>
+          <div class="field-row">
+            <div class="field"><label>Recuperación Au (%)</label><input type="number" step="0.1" data-path="margen.recAu"></div>
+            <div class="field"><label>Payability Au (%)</label><input type="number" step="0.1" data-path="margen.payAu"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>Recuperación Ag (%)</label><input type="number" step="0.1" data-path="margen.recAg"></div>
+            <div class="field"><label>Payability Ag (%)</label><input type="number" step="0.1" data-path="margen.payAg"></div>
+          </div>
+
+          <div class="subhead">Precios de mercado — ref. <span id="fecha-ref-label" class="mono"></span></div>
+          <div class="field"><label>LME Cu (US$/lb)</label><input type="number" step="0.01" data-path="margen.lmeCu"></div>
+          <div class="field"><label>Oro spot (US$/oz)</label><input type="number" step="1" data-path="margen.oroSpot"></div>
+          <div class="field"><label>Plata spot (US$/oz)</label><input type="number" step="0.1" data-path="margen.plataSpot"></div>
+          <div class="field"><label>Fecha de referencia</label><input type="text" data-path="margen.fechaRef"></div>
+          <p class="acc-note">Verifica la cotización vigente antes de decidir — el mercado se mueve a diario.</p>
+
+          <div class="subhead">Tratamiento y refinación (fundición)</div>
+          <p class="acc-note">Deja en 0 hasta tener una cotización real de tu comprador — no es un costo que hoy puedas dar por conocido.</p>
+          <div class="field"><label>TC (US$/DMT de concentrado)</label><input type="number" step="0.1" data-path="margen.tc"></div>
+          <div class="field-row">
+            <div class="field"><label>RC Cu (US$/lb pagable)</label><input type="number" step="0.01" data-path="margen.rcCu"></div>
+            <div class="field"><label>RC Au (US$/oz pagable)</label><input type="number" step="0.1" data-path="margen.rcAu"></div>
+          </div>
+          <div class="field"><label>RC Ag (US$/oz pagable)</label><input type="number" step="0.01" data-path="margen.rcAg"></div>
+
+          <div class="subhead">Maquila, transporte y análisis</div>
+          <div class="field"><label>Maquila / proceso en tu planta (US$/TMS)</label><input type="number" step="0.1" data-path="margen.maquila"></div>
+          <div class="field-row">
+            <div class="field"><label>Transporte relave (km)</label><input type="number" step="1" data-path="margen.transporteRelaveKm"></div>
+            <div class="field"><label>Tarifa (US$/t·km)</label><input type="number" step="0.01" data-path="margen.tarifaRelave"></div>
+          </div>
+          <div class="field"><label>Análisis / ensayes (US$/TMS)</label><input type="number" step="0.1" data-path="margen.analisis"></div>
+
+          <div class="subhead">Concentrado y transporte</div>
+          <div class="field"><label>Ley del concentrado objetivo (Cu %)</label><input type="number" step="0.1" data-path="margen.leyConcCu"></div>
+          <div class="field-row">
+            <div class="field"><label>Transporte concentrado (km)</label><input type="number" step="1" data-path="margen.transporteConcKm"></div>
+            <div class="field"><label>Tarifa (US$/t·km)</label><input type="number" step="0.01" data-path="margen.tarifaConc"></div>
+          </div>
+
+          <div class="subhead">Costos fijos y margen objetivo</div>
+          <div class="field-row">
+            <div class="field"><label>Fijos prorrateados (US$/TMS)</label><input type="number" step="0.1" data-path="margen.fijos"></div>
+            <div class="field"><label>Otros / G&amp;A (US$/TMS)</label><input type="number" step="0.1" data-path="margen.otrosGA"></div>
+          </div>
+          <div class="field"><label>Margen objetivo (US$/TMS)</label><input type="number" step="0.1" data-path="margen.margenObjetivo"></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Muestreo y ensaye <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field"><label>Diferencia máxima tolerada entre partes (%)</label><input type="number" step="0.1" data-path="muestreo.diferenciaMax"></div>
+          <p class="acc-note">Cu por digestión ácida + AAS; Au y Ag por ensayo al fuego (fire assay) con determinación gravimétrica/AAS del doré.</p>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Pago y entrega <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field"><label>Plazo de pago (días corridos)</label><input type="number" step="1" data-path="pago.dias"></div>
+          <div class="field"><label>Incoterm / lugar de entrega</label><input type="text" data-path="entrega.incoterm"></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Vigencia y revisión de precio <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field"><label>Variación LME que gatilla revisión (%)</label><input type="number" step="0.1" data-path="vigencia.variacionLME"></div>
+          <div class="field"><label>Plazo de negociación (días)</label><input type="number" step="1" data-path="vigencia.plazoNegociacion"></div>
+        </div>
+      </details>
+
+      <details class="acc">
+        <summary>Controversias y firma <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field"><label>Ciudad de arbitraje / domicilio</label><input type="text" data-path="controversias.ciudad"></div>
+          <div class="field"><label>Ley aplicable (país)</label><input type="text" data-path="controversias.pais"></div>
+        </div>
+      </details>
+    </aside>
+
+    <!-- ================= RIGHT: CALCULATOR + DOCUMENT ================= -->
+    <main style="display:flex;flex-direction:column;gap:20px">
+
+      <section class="panel no-print">
+        <div class="panel-head">
+          <h2>Calculadora de despacho</h2>
+          <span class="storage-note"><span class="dot"></span>Guardado en este navegador</span>
+        </div>
+        <div class="panel-body">
+          <div class="calc-inputs">
+            <div class="calc-field">
+              <label>Ley Cu insoluble</label>
+              <div class="unit-input"><input type="number" step="0.01" data-path="despacho.leyCuInsol" id="in-leyCuInsol"><span class="unit">%</span></div>
+            </div>
+            <div class="calc-field">
+              <label>Ley Cu soluble</label>
+              <div class="unit-input"><input type="number" step="0.01" data-path="despacho.leyCuSol" id="in-leyCuSol"><span class="unit">%</span></div>
+            </div>
+            <div class="calc-field">
+              <label>Ley Au determinada</label>
+              <div class="unit-input"><input type="number" step="0.01" data-path="despacho.leyAu" id="in-leyAu"><span class="unit">g/t</span></div>
+            </div>
+            <div class="calc-field">
+              <label>Ley Ag determinada</label>
+              <div class="unit-input"><input type="number" step="0.01" data-path="despacho.leyAg" id="in-leyAg"><span class="unit">g/t</span></div>
+            </div>
+            <div class="calc-field">
+              <label>Tonelaje del despacho</label>
+              <div class="unit-input"><input type="number" step="1" data-path="despacho.tonelaje" id="in-tonelaje"><span class="unit">TMS</span></div>
+            </div>
+          </div>
+          <p class="total-note" id="despacho-cu-note"></p>
+
+          <div class="tiles" id="tiles-despacho"></div>
+        </div>
+      </section>
+
+      <section class="panel no-print">
+        <div class="panel-head">
+          <h2>Margen del comprador — precio máximo de compra</h2>
+          <span class="hint">Netback vía concentrado (flotación)</span>
+        </div>
+        <div class="panel-body">
+          <p class="acc-note" style="margin-bottom:14px">
+            NSR = Retorno Neto de Fundición: valor del metal pagable (Cu + Au + Ag) menos TC/RC.
+            Usa la ley de la calculadora de arriba. El % que le corresponde al dueño no es un benchmark de industria —
+            sale de tu propio costo de proceso y del margen objetivo que definas en el panel izquierdo.
+          </p>
+          <div class="tiles" id="tiles-margen"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="doc-panel">
+        <div class="panel-head no-print">
+          <h2>Documento</h2>
+          <span class="hint" id="doc-generated"></span>
+        </div>
+        <div class="panel-body">
+          <div id="contract-doc"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const TROY_OZ_G = 31.1034768;
+const LB_PER_T = 2204.62262185;
+const STORAGE_KEY = "relaves-cu-au-ag-v1";
+
+function defaultState(){
+  return {
+    general:{ ciudad:"Copiapó", fecha:"" },
+    vendedor:{ razonSocial:"", rut:"", representante:"", domicilio:"", cedula:"", instrumento:"" },
+    comprador:{ razonSocial:"", rut:"", representante:"", domicilio:"", cedula:"", instrumento:"" },
+    antecedentes:{ ubicacion:"", region:"Región de Atacama", leyCuInsolDecl:0.75, leyCuSolDecl:0.25, leyAuDecl:2, leyAgDecl:45 },
+    cubicacion:{ toneladas:300000, tolerancia:10, fechaEstudio:"" },
+    tablaA:[
+      {leyMin:1,   precio:41, rechazo:false},
+      {leyMin:0.9, precio:35, rechazo:false},
+      {leyMin:0.8, precio:29, rechazo:false},
+      {leyMin:0.7, precio:24, rechazo:false},
+      {leyMin:0.6, precio:18, rechazo:false},
+      {leyMin:0,   precio:0,  rechazo:true}
+    ],
+    tablaB:[
+      {leyMin:2,   ajuste:76},
+      {leyMin:1.5, ajuste:57},
+      {leyMin:1,   ajuste:38},
+      {leyMin:0.5, ajuste:19},
+      {leyMin:0,   ajuste:0}
+    ],
+    tablaC:[
+      {leyMin:50, ajuste:24},
+      {leyMin:35, ajuste:17},
+      {leyMin:20, ajuste:10},
+      {leyMin:10, ajuste:5},
+      {leyMin:0,  ajuste:0}
+    ],
+    muestreo:{ diferenciaMax:10 },
+    pago:{ dias:30 },
+    entrega:{ incoterm:"EXW cancha del Vendedor" },
+    vigencia:{ variacionLME:10, plazoNegociacion:15 },
+    controversias:{ ciudad:"Copiapó", pais:"Chile" },
+    margen:{
+      recCuInsol:88, recCuSol:35, recAu:60, recAg:65,
+      payCu:96.5, payAu:90, payAg:90,
+      lmeCu:6.75, oroSpot:4385, plataSpot:52, fechaRef:"08-09-2026",
+      tc:0, rcCu:0, rcAu:0, rcAg:0,
+      maquila:18, transporteRelaveKm:70, tarifaRelave:0.12,
+      analisis:1.5,
+      leyConcCu:20, transporteConcKm:50, tarifaConc:0.18,
+      fijos:3, otrosGA:2, margenObjetivo:8
+    },
+    despacho:{ leyCuInsol:0.75, leyCuSol:0.25, leyAu:2, leyAg:45, tonelaje:1000 }
+  };
+}
+
+let state = loadState();
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    return deepMerge(defaultState(), parsed);
+  }catch(e){ return defaultState(); }
+}
+function deepMerge(base, over){
+  if(Array.isArray(base)) return Array.isArray(over) ? over : base;
+  if(typeof base === "object" && base !== null){
+    const out = {...base};
+    if(over && typeof over === "object"){
+      for(const k in base) if(k in over) out[k] = deepMerge(base[k], over[k]);
+    }
+    return out;
+  }
+  return (over === undefined) ? base : over;
+}
+function save(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+function getPath(obj, path){ return path.split(".").reduce((o,k)=> (o==null?o:o[k]), obj); }
+function setPath(obj, path, value){
+  const keys = path.split(".");
+  let o = obj;
+  for(let i=0;i<keys.length-1;i++) o = o[keys[i]];
+  o[keys[keys.length-1]] = value;
+}
+
+function fmt(n, min, max){
+  if(min===undefined) min=2; if(max===undefined) max=min;
+  n = isFinite(n) ? n : 0;
+  return n.toLocaleString("es-CL",{minimumFractionDigits:min, maximumFractionDigits:max});
+}
+function usd(n){ return "US$ " + fmt(n,2); }
+function usd0(n){ return "US$ " + fmt(n,0); }
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function fillOr(val, bracket){
+  const v = (val ?? "").toString().trim();
+  return v ? `<mark class="fill">${esc(v)}</mark>` : `[${bracket}]`;
+}
+
+/* ---------- tramo lookup + range labels ---------- */
+function sortedDesc(arr){ return [...arr].sort((a,b)=> b.leyMin - a.leyMin); }
+function findTramo(arr, ley){
+  const s = sortedDesc(arr);
+  for(const row of s) if(ley >= row.leyMin) return row;
+  return s[s.length-1] || {leyMin:0, precio:0, ajuste:0, rechazo:false};
+}
+function rangeLabel(sorted, i, unit, decimals){
+  const row = sorted[i];
+  const d = decimals===undefined?2:decimals;
+  const v = fmt(row.leyMin, d, d);
+  if(i === 0) return `≥ ${v}${unit}`;
+  if(i === sorted.length-1) return `< ${fmt(sorted[i-1].leyMin,d,d)}${unit}`;
+  return `${v}${unit} – < ${fmt(sorted[i-1].leyMin,d,d)}${unit}`;
+}
+function tramoLabelFor(arr, ley, unit, decimals){
+  const s = sortedDesc(arr);
+  const idx = s.findIndex(r => ley >= r.leyMin);
+  const i = idx === -1 ? s.length-1 : idx;
+  return rangeLabel(s, i, unit, decimals);
+}
+
+/* ---------- table row rendering (A/B/C) ---------- */
+function renderTableA(){
+  const el = document.getElementById("tabla-a");
+  el.innerHTML = "";
+  state.tablaA.forEach((row, i) => {
+    const div = document.createElement("div");
+    div.className = "grid-row";
+    div.innerHTML = `
+      <input type="number" step="0.01" value="${row.leyMin}" data-tbl="tablaA" data-idx="${i}" data-field="leyMin">
+      <input type="number" step="1" value="${row.precio}" data-tbl="tablaA" data-idx="${i}" data-field="precio">
+      <label class="chk"><input type="checkbox" ${row.rechazo?"checked":""} data-tbl="tablaA" data-idx="${i}" data-field="rechazo"></label>
+      <button class="rm" data-rm="tablaA" data-idx="${i}" title="Eliminar tramo">✕</button>`;
+    el.appendChild(div);
+  });
+  bindTableRows("tablaA");
+}
+function renderTableBC(key, elId){
+  const el = document.getElementById(elId);
+  el.innerHTML = "";
+  state[key].forEach((row, i) => {
+    const div = document.createElement("div");
+    div.className = "grid-row noreject";
+    div.innerHTML = `
+      <input type="number" step="0.01" value="${row.leyMin}" data-tbl="${key}" data-idx="${i}" data-field="leyMin">
+      <input type="number" step="1" value="${row.ajuste}" data-tbl="${key}" data-idx="${i}" data-field="ajuste">
+      <button class="rm" data-rm="${key}" data-idx="${i}" title="Eliminar tramo">✕</button>`;
+    el.appendChild(div);
+  });
+  bindTableRows(key);
+}
+function bindTableRows(key){
+  document.querySelectorAll(`[data-tbl="${key}"]`).forEach(inp => {
+    const evt = inp.type === "checkbox" ? "change" : "input";
+    inp.addEventListener(evt, () => {
+      const idx = +inp.dataset.idx, field = inp.dataset.field;
+      const val = inp.type === "checkbox" ? inp.checked : (parseFloat(inp.value) || 0);
+      state[key][idx][field] = val;
+      save(); update();
+    });
+  });
+  document.querySelectorAll(`[data-rm="${key}"]`).forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = +btn.dataset.idx;
+      state[key].splice(idx,1);
+      if(state[key].length === 0) state[key].push(key==="tablaA"?{leyMin:0,precio:0,rechazo:true}:{leyMin:0,ajuste:0});
+      save(); renderAllTables(); update();
+    });
+  });
+}
+function renderAllTables(){
+  renderTableA();
+  renderTableBC("tablaB","tabla-b");
+  renderTableBC("tablaC","tabla-c");
+}
+document.querySelectorAll("[data-add]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const key = btn.dataset.add;
+    if(key === "tablaA") state.tablaA.push({leyMin:0.5, precio:0, rechazo:false});
+    else state[key].push({leyMin:0, ajuste:0});
+    save(); renderAllTables(); update();
+  });
+});
+
+/* ---------- generic field binding ---------- */
+function bindFields(){
+  document.querySelectorAll("[data-path]").forEach(el => {
+    const val = getPath(state, el.dataset.path);
+    el.value = val === undefined || val === null ? "" : val;
+    el.addEventListener("input", () => {
+      const v = el.type === "number" ? (parseFloat(el.value) || 0) : el.value;
+      setPath(state, el.dataset.path, v);
+      save(); update();
+    });
+  });
+}
+function repopulateFields(){
+  document.querySelectorAll("[data-path]").forEach(el => {
+    const val = getPath(state, el.dataset.path);
+    el.value = val === undefined || val === null ? "" : val;
+  });
+}
+
+/* ---------- calculations ---------- */
+function totalCu(insol, sol){ return (insol||0) + (sol||0); }
+function kox(insol, sol){ const t = totalCu(insol, sol); return t > 0 ? (sol||0)/t*100 : 0; }
+
+function calc(){
+  const d = state.despacho, m = state.margen;
+  const leyCuTotal = totalCu(d.leyCuInsol, d.leyCuSol);
+  const tramoA = findTramo(state.tablaA, leyCuTotal);
+  const tramoB = findTramo(state.tablaB, d.leyAu);
+  const tramoC = findTramo(state.tablaC, d.leyAg);
+  const precioA = tramoA.rechazo ? 0 : tramoA.precio;
+  const precioFinal = precioA + tramoB.ajuste + tramoC.ajuste;
+  const monto = precioFinal * d.tonelaje;
+
+  const cuInsolFrac = d.leyCuInsol/100, cuSolFrac = d.leyCuSol/100;
+  const recCuInsol = m.recCuInsol/100, recCuSol = m.recCuSol/100, payCu = m.payCu/100;
+  const recAu = m.recAu/100, payAu = m.payAu/100;
+  const recAg = m.recAg/100, payAg = m.payAg/100;
+  const leyConcCuFrac = (m.leyConcCu||1)/100;
+
+  // Cobre recuperado = insoluble (sulfuros, alta recuperación) + soluble (óxidos, baja recuperación) — cada uno con su propia tasa de flotación.
+  const cuRecoveredFrac = cuInsolFrac * recCuInsol + cuSolFrac * recCuSol;
+  const recCuPonderada = leyCuTotal > 0 ? cuRecoveredFrac / (leyCuTotal/100) * 100 : 0;
+
+  const pullFrac = leyConcCuFrac > 0 ? cuRecoveredFrac / leyConcCuFrac : 0;
+  const concTon = pullFrac * d.tonelaje;
+  const leyAuConc = pullFrac > 0 ? (d.leyAu * recAu) / pullFrac : 0;
+  const leyAgConc = pullFrac > 0 ? (d.leyAg * recAg) / pullFrac : 0;
+
+  const valueCu = cuRecoveredFrac * payCu * LB_PER_T * m.lmeCu;
+  const valueAu = d.leyAu * recAu * payAu / TROY_OZ_G * m.oroSpot;
+  const valueAg = d.leyAg * recAg * payAg / TROY_OZ_G * m.plataSpot;
+
+  const payableCuLb = cuRecoveredFrac * payCu * LB_PER_T;
+  const payableAuOz = d.leyAu * recAu * payAu / TROY_OZ_G;
+  const payableAgOz = d.leyAg * recAg * payAg / TROY_OZ_G;
+
+  const costTC = m.tc * pullFrac;
+  const costRCCu = m.rcCu * payableCuLb;
+  const costRCAu = m.rcAu * payableAuOz;
+  const costRCAg = m.rcAg * payableAgOz;
+
+  const nsr = valueCu + valueAu + valueAg - costTC - costRCCu - costRCAu - costRCAg;
+
+  const transporteRelaveCost = m.transporteRelaveKm * m.tarifaRelave;
+  const transporteConcCost = pullFrac * m.transporteConcKm * m.tarifaConc;
+  const costoOperativo = m.maquila + transporteRelaveCost + transporteConcCost + m.analisis + m.fijos + m.otrosGA;
+
+  const precioMax = nsr - costoOperativo - m.margenObjetivo;
+  const margenTablas = nsr - costoOperativo - precioFinal;
+  const escenario5050 = (nsr - costoOperativo) / 2;
+  const pct = x => nsr !== 0 ? (x/nsr*100) : 0;
+
+  return {
+    leyCuTotal, tramoA, tramoB, tramoC, precioA, precioFinal, monto,
+    cuRecoveredFrac, recCuPonderada,
+    pullFrac, concTon, leyAuConc, leyAgConc,
+    valueCu, valueAu, valueAg, nsr,
+    transporteRelaveCost, transporteConcCost, costoOperativo,
+    precioMax, margenTablas, escenario5050, pct
+  };
+}
+
+/* ---------- render: calculator tiles ---------- */
+function renderTiles(c){
+  const d = state.despacho;
+  const rangeA = tramoLabelFor(state.tablaA, c.leyCuTotal, "%");
+  const rangeB = tramoLabelFor(state.tablaB, d.leyAu, " g/t");
+  const rangeC = tramoLabelFor(state.tablaC, d.leyAg, " g/t");
+
+  document.getElementById("despacho-cu-note").textContent =
+    `Cu total (insoluble + soluble) = ${fmt(c.leyCuTotal,2,2)}% · Kox = CuS/CuT ≈ ${fmt(kox(d.leyCuInsol,d.leyCuSol),1,1)}% — la Tabla A se aplica sobre este total.`;
+
+  document.getElementById("tiles-despacho").innerHTML = `
+    <div class="tile accent">
+      <span class="k">Tramo Cu (total)</span>
+      <span class="v mono" style="font-size:15px">${rangeA}</span>
+      <span class="sub">${c.tramoA.rechazo ? "Rechazo del lote" : `Base ${usd0(c.tramoA.precio)} /TMS`}</span>
+    </div>
+    <div class="tile gold-t">
+      <span class="k">Tramo Au</span>
+      <span class="v mono" style="font-size:15px">${rangeB}</span>
+      <span class="sub">Ajuste ${c.tramoB.ajuste>=0?"+":""}${usd0(c.tramoB.ajuste)} /TMS</span>
+    </div>
+    <div class="tile silver-t">
+      <span class="k">Tramo Ag</span>
+      <span class="v mono" style="font-size:15px">${rangeC}</span>
+      <span class="sub">Ajuste ${c.tramoC.ajuste>=0?"+":""}${usd0(c.tramoC.ajuste)} /TMS</span>
+    </div>
+    <div class="tile ${c.tramoA.rechazo?"danger":""}">
+      <span class="k">Precio final</span>
+      <span class="v">${c.tramoA.rechazo?"—":usd0(c.precioFinal)}</span>
+      <span class="sub">por TMS</span>
+    </div>
+    <div class="tile big good">
+      <span class="k">Monto del despacho</span>
+      <span class="v">${c.tramoA.rechazo?"—":usd0(c.monto)}</span>
+      <span class="sub">${fmt(d.tonelaje,0,0)} TMS</span>
+    </div>
+  `;
+}
+
+function renderMargenTiles(c){
+  document.getElementById("tiles-margen").innerHTML = `
+    <div class="tile big accent">
+      <span class="k">Ingreso neto (NSR)</span>
+      <span class="v">${usd(c.nsr)} <small>/TMS</small></span>
+      <span class="sub">Cu ${usd0(c.valueCu)} + Au ${usd0(c.valueAu)} + Ag ${usd0(c.valueAg)} por TMS de relave</span>
+    </div>
+    <div class="tile">
+      <span class="k">Costo operativo</span>
+      <span class="v">${usd(c.costoOperativo)}</span>
+      <span class="sub">maquila + transporte relave + transporte conc. + análisis + fijos + G&amp;A</span>
+    </div>
+    <div class="tile silver-t">
+      <span class="k">Recuperación Cu ponderada</span>
+      <span class="v">${fmt(c.recCuPonderada,1,1)}<small>%</small></span>
+      <span class="sub">insoluble ${fmt(state.margen.recCuInsol,0,0)}% + soluble ${fmt(state.margen.recCuSol,0,0)}%, ponderado por ley</span>
+    </div>
+    <div class="tile">
+      <span class="k">Concentrado producido</span>
+      <span class="v">${fmt(c.concTon,1,1)} <small>t</small></span>
+      <span class="sub">≈${fmt(c.pullFrac*1000,2,2)} kg/TMS de relave (pull ≈${fmt(c.pullFrac*100,2,2)}%)</span>
+    </div>
+    <div class="tile">
+      <span class="k">Ley del concentrado</span>
+      <span class="v mono" style="font-size:15px">${fmt(c.leyAuConc,1,1)} g/t Au</span>
+      <span class="sub">${fmt(c.leyAgConc,0,0)} g/t Ag · a ${fmt(state.margen.leyConcCu,0,0)}% Cu objetivo</span>
+    </div>
+    <div class="tile big good">
+      <span class="k">Precio máximo a pagar al dueño</span>
+      <span class="v">${usd(c.precioMax)} <small>/TMS</small></span>
+      <span class="sub">con tu margen objetivo incluido · ≈${fmt(c.pct(c.precioMax),1,1)}% del NSR</span>
+    </div>
+    <div class="tile ${c.margenTablas>=0?"good":"danger"}">
+      <span class="k">Margen pagando Tablas A+B+C</span>
+      <span class="v">${c.margenTablas>=0?"+":""}${usd(c.margenTablas)}</span>
+      <span class="sub">pagando ${usd0(c.precioFinal)}/TMS · tus tablas hoy pagan ≈${fmt(c.pct(c.precioFinal),1,1)}% del NSR</span>
+    </div>
+    <div class="tile big">
+      <span class="k">Escenario 50/50 tras costos</span>
+      <span class="v">${usd(c.escenario5050)} <small>/TMS al dueño</small></span>
+      <span class="sub">mitad de (NSR − costo operativo, ${usd0(c.nsr-c.costoOperativo)}/TMS) · ≈${fmt(c.pct(c.escenario5050),1,1)}% del NSR · tu margen sería el mismo monto</span>
+    </div>
+  `;
+}
+
+/* ---------- contract document ---------- */
+const NUM_ES = ["cero","uno","dos","tres","cuatro","quinto","sexto","séptimo","octavo","noveno","décimo"];
+function ordinalTitle(n){
+  const map = ["Primero","Segundo","Tercero","Cuarto","Quinto","Sexto","Séptimo","Octavo","Noveno","Décimo",
+    "Undécimo","Duodécimo","Décimo tercero","Décimo cuarto","Décimo quinto","Décimo sexto","Décimo séptimo","Décimo octavo"];
+  return map[n-1] || `Cláusula ${n}`;
+}
+
+function buildDocTable(arr, kind){
+  const sorted = sortedDesc(arr);
+  const unit = kind === "A" ? "%" : " g/t";
+  const decimals = 2;
+  const rows = sorted.map((row,i) => {
+    const label = rangeLabel(sorted, i, unit, decimals);
+    let val;
+    if(kind === "A") val = row.rechazo ? "Rechazo del lote o renegociación" : usd0(row.precio);
+    else val = (row.ajuste>=0?"+ ":"") + usd0(row.ajuste);
+    return `<tr><td>${i+1}</td><td>${label}</td><td class="num mono">${val}</td></tr>`;
+  }).join("");
+  const header = kind === "A"
+    ? `<tr><th>Tramo</th><th>Ley de Cu</th><th>Precio base (US$/TMS)</th></tr>`
+    : `<tr><th>Tramo</th><th>Ley de ${kind==="B"?"Au":"Ag"}</th><th>Ajuste (US$/TMS)</th></tr>`;
+  return `<table class="doc-table"><thead>${header}</thead><tbody>${rows}</tbody></table>`;
+}
+
+function rechazoThreshold(){
+  const s = sortedDesc(state.tablaA);
+  const idx = s.findIndex(r => r.rechazo);
+  if(idx > 0) return s[idx-1].leyMin;
+  if(idx === -1) return s[s.length-1]?.leyMin ?? 0;
+  return s[s.length-1]?.leyMin ?? 0;
+}
+
+function renderContract(c){
+  const V = state.vendedor, C = state.comprador, A = state.antecedentes, Q = state.cubicacion, M = state.margen;
+  const today = new Date().toLocaleDateString("es-CL",{day:"2-digit",month:"2-digit",year:"numeric"});
+  const html = `
+    <h3 class="doc-title">Contrato de compraventa de relaves mineros</h3>
+    <p class="doc-meta">Borrador de trabajo — generado ${today}</p>
+
+    <p>En ${fillOr(state.general.ciudad,"ciudad")}, a ${fillOr(state.general.fecha,"fecha")}, comparecen:</p>
+
+    <p><span class="party">EL VENDEDOR</span>: ${fillOr(V.razonSocial,"razón social")}, RUT N° ${fillOr(V.rut,"RUT")},
+    domiciliada en ${fillOr(V.domicilio,"domicilio")}, representada por don/doña ${fillOr(V.representante,"representante")},
+    cédula de identidad N° ${fillOr(V.cedula,"N° cédula")}, según consta en ${fillOr(V.instrumento,"instrumento de representación")},
+    en adelante "EL VENDEDOR"; y</p>
+
+    <p><span class="party">EL COMPRADOR</span>: ${fillOr(C.razonSocial,"razón social")}, RUT N° ${fillOr(C.rut,"RUT")},
+    domiciliada en ${fillOr(C.domicilio,"domicilio")}, representada por don/doña ${fillOr(C.representante,"representante")},
+    cédula de identidad N° ${fillOr(C.cedula,"N° cédula")}, según consta en ${fillOr(C.instrumento,"instrumento de representación")},
+    en adelante "EL COMPRADOR";</p>
+
+    <p>en conjunto "las Partes", quienes acuerdan celebrar el presente Contrato de Compraventa de Relaves Mineros
+    ("el Contrato"), sujeto a las cláusulas siguientes:</p>
+
+    <div class="clause-title">Primero: Antecedentes</div>
+    <p>1.1 EL VENDEDOR es dueño y/o poseedor legítimo de un volumen de material mineralizado ya procesado
+    ("los Relaves"), acopiado en sus dependencias ubicadas en ${fillOr(A.ubicacion,"ubicación")}, ${esc(A.region)}.</p>
+    <p>1.2 Según información proporcionada por EL VENDEDOR, dicho material presenta una ley total aproximada de
+    ${fmt(totalCu(A.leyCuInsolDecl,A.leyCuSolDecl),2,2)}% de cobre (Cu) — de la cual ${fmt(A.leyCuInsolDecl,2,2)}%
+    corresponde a cobre insoluble (sulfuros) y ${fmt(A.leyCuSolDecl,2,2)}% a cobre soluble (óxidos y especies
+    solubles en ácido sulfúrico diluido, razón CuS/CuT o "Kox" ≈ ${fmt(kox(A.leyCuInsolDecl,A.leyCuSolDecl),1,1)}%) —,
+    además de ${fmt(A.leyAuDecl,2,2)} gramos por tonelada de oro (Au) y ${fmt(A.leyAgDecl,2,2)} gramos por
+    tonelada de plata (Ag), sin perjuicio de la verificación establecida en la Cláusula Sexta.</p>
+    <p>1.3 EL COMPRADOR tiene interés en adquirir los Relaves para su procesamiento en planta de beneficio,
+    con el objeto de obtener concentrados u otros productos comercializables.</p>
+    <p>1.4 Las Partes dejan constancia de que los Relaves corresponden a material mineral ya procesado y acopiado,
+    y no a mineral en bruto ni a un yacimiento en explotación.</p>
+
+    <div class="clause-title">Segundo: Objeto del contrato</div>
+    <p>EL VENDEDOR vende, cede y transfiere a EL COMPRADOR, quien compra y acepta para sí, los Relaves acopiados
+    en las dependencias individualizadas en la Cláusula Primera, en los términos, cantidad, calidad y precio
+    que se establecen en este instrumento.</p>
+
+    <div class="clause-title">Tercero: Cubicación y cantidad</div>
+    <p>3.1 La cubicación referencial de los Relaves es de aproximadamente ${fmt(Q.toneladas,0,0)} toneladas,
+    con una tolerancia de ± ${fmt(Q.tolerancia,1,1)}%, según levantamiento topográfico/volumétrico de fecha
+    ${fillOr(Q.fechaEstudio,"fecha")}, que las Partes declaran conocer.</p>
+    <p>3.2 La cantidad definitiva y el precio se determinarán sobre la base del tonelaje efectivamente pesado
+    en báscula certificada al momento de cada despacho, conforme a la Cláusula Octava. La cifra indicada en el
+    numeral 3.1 es referencial y no constituye garantía de cantidad exacta.</p>
+
+    <div class="clause-title">Cuarto: Declaración y garantía de leyes del Vendedor</div>
+    <p>4.1 EL VENDEDOR declara y garantiza que los Relaves presentan, como promedio ponderado del lote total,
+    leyes no inferiores a:</p>
+    <p>— Cobre total (Cu): ${fmt(totalCu(A.leyCuInsolDecl,A.leyCuSolDecl),2,2)}%, de los cuales ${fmt(A.leyCuInsolDecl,2,2)}%
+    son insolubles y ${fmt(A.leyCuSolDecl,2,2)}% son solubles<br>— Oro (Au): ${fmt(A.leyAuDecl,2,2)} g/t<br>— Plata (Ag): ${fmt(A.leyAgDecl,2,2)} g/t</p>
+    <p>4.2 Esta declaración se presta de buena fe en base a [estudios, muestreos o registros del Vendedor].</p>
+    <p>4.3 EL VENDEDOR autoriza expresamente a EL COMPRADOR a verificar dichas leyes mediante el procedimiento
+    de muestreo y ensaye de la Cláusula Sexta. Las Partes acuerdan que, para todos los efectos del cálculo del
+    precio, prevalecerá el resultado del muestreo y ensaye contradictorio sobre la declaración de este numeral.</p>
+
+    <div class="clause-title">Quinto: Precio</div>
+    <p>5.1 El precio se determinará por tonelada métrica seca (TMS) de material efectivamente entregado y pesado,
+    conforme a la Tabla A (ley de cobre) más los ajustes de la Tabla B (ley de oro) y Tabla C (ley de plata),
+    aplicadas sobre la ley determinada según la Cláusula Sexta para cada lote o despacho.</p>
+    <p><strong>Tabla A — Precio base según ley de cobre (Cu)</strong></p>
+    ${buildDocTable(state.tablaA,"A")}
+    <p><strong>Tabla B — Ajuste según ley de oro (Au)</strong></p>
+    ${buildDocTable(state.tablaB,"B")}
+    <p><strong>Tabla C — Ajuste según ley de plata (Ag)</strong></p>
+    ${buildDocTable(state.tablaC,"C")}
+    <div class="formula">Precio final (US$/TMS) = Precio Base (Tabla A) + Ajuste Au (Tabla B) + Ajuste Ag (Tabla C)</div>
+    <p>5.2 Las Partes dejan constancia de que los valores de las Tablas A, B y C fueron estimados considerando:
+    (i) un descuento por pérdida metalúrgica sobre la ley determinada, distinto para cada metal según su
+    recuperación en planta — y, en el caso del cobre, distinto además según se trate de cobre insoluble
+    (sulfuros: calcopirita, calcosina, covelina, con recuperación habitual de 85% a 95% según literatura
+    metalúrgica) o cobre soluble (óxidos y especies solubles en ácido: crisocola, malaquita, atacamita, con
+    recuperación habitual de 20% a 50% incluso aplicando sulfidización); (ii) costos de tratamiento y maquila
+    (TC/RC) descontados de precios de referencia de mercado para cobre, oro y plata; y (iii) un valor neto de
+    recuperación estimado en torno al 50% del valor bruto del contenido metálico pagable. Estos supuestos se
+    dejan expresados como fundamento de la negociación; el precio vigente y exigible es el fijado en las
+    Tablas A, B y C, sujeto al mecanismo de revisión de la Cláusula Décimo.</p>
+    <p>5.3 Los montos de las Tablas A, B y C constituyen los valores pactados por las Partes para este Contrato
+    y deben reflejar condiciones reales de mercado, distancia de transporte y capacidad de la planta receptora.</p>
+
+    <div class="clause-title">Sexto: Muestreo, ensaye y determinación de leyes</div>
+    <p>6.1 Antes de cada despacho, o sobre pilas representativas del acopio, las Partes efectuarán un muestreo
+    conjunto conforme a [protocolo de muestreo], del cual se extraerán al menos tres submuestras: una para
+    EL VENDEDOR, una para EL COMPRADOR y una contramuestra de resguardo.</p>
+    <p>6.2 El cobre total (CuT) se determinará por digestión ácida y espectrometría de absorción atómica (AAS).
+    El cobre soluble (CuS) se determinará por lixiviación con ácido sulfúrico diluido en frío (método CuSO4) y
+    su medición por AAS o volumetría, quedando el cobre insoluble (CuI) definido como CuI = CuT − CuS. El oro y
+    la plata se determinarán por ensayo al fuego (fire assay) con determinación gravimétrica o por AAS del doré.
+    Todos los ensayes se realizarán en un laboratorio acreditado independiente de ambas Partes, cuyo costo se
+    dividirá por partes iguales, salvo pacto distinto.</p>
+    <p>6.3 Si la diferencia entre los resultados de ambas Partes excede ${fmt(state.muestreo.diferenciaMax,1,1)}%
+    para cualquiera de los tres metales, se dirimirá mediante un tercer ensaye en un laboratorio arbitral
+    designado de común acuerdo, cuyo resultado será definitivo y cuyo costo asumirá la Parte cuyo resultado
+    se aleje más del dirimente.</p>
+    <p>6.4 El resultado validado conforme a este numeral es el que se aplicará a las Tablas A, B y C para
+    determinar el precio de cada despacho.</p>
+
+    <div class="clause-title">Séptimo: Forma y lugar de pago</div>
+    <p>7.1 El precio se pagará en dólares de los Estados Unidos de América, mediante transferencia bancaria u
+    otro medio acordado, dentro de ${fmt(state.pago.dias,0,0)} días corridos siguientes a la validación de
+    peso y leyes de cada despacho.</p>
+
+    <div class="clause-title">Octavo: Entrega, transporte y transferencia de riesgo</div>
+    <p>8.1 La entrega se efectuará ${esc(state.entrega.incoterm)}, mediante despachos parciales conforme al
+    programa que las Partes acuerden dado el volumen total involucrado.</p>
+    <p>8.2 El pesaje se efectuará en báscula certificada, con boleta de pesaje suscrita por ambas Partes o sus
+    representantes en cada despacho.</p>
+    <p>8.3 El riesgo y el dominio sobre cada lote se transfieren a EL COMPRADOR al momento de carguío en cancha
+    del Vendedor.</p>
+
+    <div class="clause-title">Noveno: Incumplimiento de leyes mínimas y rechazo de lotes</div>
+    <p>9.1 Si un lote arroja una ley de cobre inferior a ${fmt(rechazoThreshold(),2,2)}% (tramo de rechazo de la
+    Tabla A), EL COMPRADOR podrá, a su elección: (a) rechazar el lote, quedando este a disposición de EL VENDEDOR;
+    o (b) aceptar el lote a un precio a renegociar de común acuerdo. Lo anterior es sin perjuicio de los ajustes
+    por oro y plata de las Tablas B y C, que se aplican únicamente sobre lotes aceptados.</p>
+    <p>9.2 El rechazo de un lote conforme a este numeral no afecta la validez ni la continuidad del Contrato
+    respecto de los demás lotes o despachos.</p>
+
+    <div class="clause-title">Décimo: Revisión de precio</div>
+    <p>Si el precio de referencia LME para cobre grado A, el oro spot o la plata spot, promediados durante el
+    mes calendario del despacho, varían en más de ${fmt(state.vigencia.variacionLME,1,1)}% respecto de las
+    referencias señaladas en la Cláusula 5.2, cualquiera de las Partes podrá solicitar la revisión proporcional
+    de los valores de las Tablas A, B y/o C, mediante negociación de buena fe dentro de ${fmt(state.vigencia.plazoNegociacion,0,0)} días.</p>
+
+    <div class="clause-title">Undécimo: Vigencia</div>
+    <p>El Contrato entra en vigencia en la fecha de su suscripción y se mantendrá vigente hasta el despacho y
+    pago íntegro de la totalidad de los Relaves conforme a la Cláusula Tercera.</p>
+
+    <div class="clause-title">Duodécimo: Cumplimiento normativo y titularidad</div>
+    <p>12.1 EL VENDEDOR declara que es dueño y/o tiene la disposición legal suficiente sobre los Relaves para
+    celebrar este Contrato, que estos no se encuentran embargados, litigiosos ni sujetos a gravámenes que
+    impidan su venta, y que su origen y manejo cumplen con la normativa sectorial y ambiental aplicable en
+    Chile (SERNAGEOMIN, resoluciones de calificación ambiental aplicables, y demás normativa vigente sobre
+    depósitos de relaves).</p>
+    <p>12.2 EL VENDEDOR se obliga a mantener indemne a EL COMPRADOR frente a cualquier reclamo de terceros
+    relativo a la titularidad u origen de los Relaves.</p>
+
+    <div class="clause-title">Décimo tercero: Confidencialidad</div>
+    <p>Las Partes se obligan a mantener confidencial la información técnica y comercial intercambiada con
+    motivo de este Contrato, salvo que deba divulgarse por mandato legal o autoridad competente.</p>
+
+    <div class="clause-title">Décimo cuarto: Cesión</div>
+    <p>Ninguna de las Partes podrá ceder este Contrato ni los derechos y obligaciones que de él emanan sin el
+    consentimiento previo y escrito de la otra Parte.</p>
+
+    <div class="clause-title">Décimo quinto: Caso fortuito o fuerza mayor</div>
+    <p>Ninguna Parte será responsable por el incumplimiento derivado de caso fortuito o fuerza mayor, en los
+    términos del artículo 45 del Código Civil, debiendo la Parte afectada notificar a la otra dentro de 10
+    días corridos de ocurrido el evento.</p>
+
+    <div class="clause-title">Décimo sexto: Resolución de controversias</div>
+    <p>Toda dificultad que se produzca entre las Partes respecto de la aplicación, interpretación, duración,
+    validez o ejecución de este Contrato se someterá a un árbitro arbitrador designado de común acuerdo por
+    las Partes, con asiento en la ciudad de ${fillOr(state.controversias.ciudad,"ciudad")}, renunciando las
+    Partes a cualquier otro fuero.</p>
+
+    <div class="clause-title">Décimo séptimo: Ley aplicable</div>
+    <p>Este Contrato se rige por las leyes de la República de ${fillOr(state.controversias.pais,"país")}.</p>
+
+    <div class="clause-title">Décimo octavo: Domicilio</div>
+    <p>Para todos los efectos legales derivados de este Contrato, las Partes fijan su domicilio en la ciudad de
+    ${fillOr(state.controversias.ciudad,"ciudad")} y se someten a la competencia de sus tribunales, sin perjuicio
+    de lo establecido en la Cláusula Décimo Sexta.</p>
+
+    <p>En señal de conformidad, las Partes suscriben el presente Contrato en dos ejemplares de idéntico tenor
+    y fecha.</p>
+
+    <div class="sig-row">
+      <div class="sig-line">EL VENDEDOR</div>
+      <div class="sig-line">EL COMPRADOR</div>
+    </div>
+    <p class="doc-footer">Documento generado como borrador de trabajo a partir de los parámetros ingresados.
+    No constituye asesoría legal ni reemplaza la revisión de un abogado con experiencia en derecho minero
+    chileno, ni la debida diligencia sobre la titularidad de los Relaves.<br><br>
+    Los porcentajes de recuperación por flotación de cobre insoluble/soluble usados por defecto en la
+    calculadora son valores orientativos de literatura metalúrgica general — no un resultado de ensayos sobre
+    este material — y deben reemplazarse por pruebas de flotabilidad propias antes de fijar precio: Wills'
+    Mineral Processing Technology (calcosina &gt;95%, covelina &gt;85% en flotación de sulfuros secundarios);
+    tesis "Flotación de cobre soluble en planta concentradora, División Salvador-CODELCO" (Universidad de
+    Concepción) sobre baja recuperación de cobre oxidado/soluble y su mejora parcial con sulfidización (NaSH);
+    y literatura sobre flotación de crisocola/malaquita/atacamita (superficies muy hidrofílicas, difíciles
+    de flotar sin tratamiento).</p>
+  `;
+  document.getElementById("contract-doc").innerHTML = html;
+  document.getElementById("doc-generated").textContent = "Actualizado " + new Date().toLocaleTimeString("es-CL",{hour:"2-digit",minute:"2-digit"});
+}
+
+/* ---------- update loop ---------- */
+function update(){
+  const c = calc();
+  renderTiles(c);
+  renderMargenTiles(c);
+  renderContract(c);
+  document.getElementById("fecha-ref-label").textContent = state.margen.fechaRef || "";
+  const A = state.antecedentes;
+  document.getElementById("ley-cu-total-note").textContent =
+    `Ley Cu total declarada ≈ ${fmt(totalCu(A.leyCuInsolDecl,A.leyCuSolDecl),2,2)}% · Kox = CuS/CuT ≈ ${fmt(kox(A.leyCuInsolDecl,A.leyCuSolDecl),1,1)}%`;
+}
+
+/* ---------- top actions ---------- */
+document.getElementById("btn-print").addEventListener("click", () => window.print());
+document.getElementById("btn-copy").addEventListener("click", async () => {
+  const btn = document.getElementById("btn-copy");
+  const text = document.getElementById("contract-doc").innerText;
+  try{
+    await navigator.clipboard.writeText(text);
+    const orig = btn.textContent;
+    btn.textContent = "✓ Copiado";
+    setTimeout(() => btn.textContent = orig, 1600);
+  }catch(e){
+    const range = document.createRange();
+    range.selectNode(document.getElementById("contract-doc"));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  }
+});
+document.getElementById("btn-reset").addEventListener("click", () => {
+  if(!confirm("¿Restablecer todos los valores por defecto? Se perderá lo editado en este navegador.")) return;
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  state = defaultState();
+  repopulateFields();
+  renderAllTables();
+  update();
+});
+
+/* ---------- init ---------- */
+bindFields();
+renderAllTables();
+update();
+})();
+</script>
