@@ -1,4 +1,4 @@
-# contratos
+# Contratos
 
 Auto generador de contratos.
 
