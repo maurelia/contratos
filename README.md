@@ -44,3 +44,24 @@ derecho minero chileno.
 - **GitHub Pages**: en *Settings → Pages*, elige la rama `main` y la raíz
   `/` como fuente. Queda disponible en
   `https://<usuario>.github.io/contratos/relaves-cu-au-ag.html`.
+
+## Comparador: comprador directo vs. ENAMI
+
+`comparador-enami.html` es una calculadora de un solo archivo que toma un
+despacho de mineral (tonelaje, ley de Cu, Au y opcionalmente Ag) y compara:
+
+- **Comprador directo**: valor bruto = precio de mercado × ley × recuperación
+  pactada, sin descuentos (la misma lógica que la cotización de ejemplo de
+  500 t al 0,8% Cu / 0,5 g/t Au, US$ 73.276 brutos).
+- **ENAMI (estimado)**: la misma fórmula pública de ENAMI
+  (`Valor Cu = precio × 2.204,6223 × ley × recuperación`), con recuperación,
+  maquila, castigos y ley mínima de recepción (0,8% CuS) como campos
+  editables.
+
+**Importante**: los valores de la tabla ENAMI son de ejemplo, no la tarifa
+oficial de septiembre 2026 — el entorno donde se generó esta calculadora no
+tuvo acceso a `enami.cl` para leer el PDF de tarifas del mes. Ábrelo tú
+mismo en `enami.cl/EnamiTransparente/B_HistoricoTarifas/` y actualiza
+recuperación/maquila/castigos en el panel "Tarifa ENAMI" — el resto del
+cálculo se recalcula solo. Igual que el resto de la suite, guarda tus
+cambios en `localStorage` y no constituye asesoría comercial ni legal.

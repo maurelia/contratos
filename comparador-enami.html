@@ -1,0 +1,549 @@
+<meta charset="UTF-8">
+<title>Comparador: venta directa vs. ENAMI</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f6f2ea;
+  --surface:#fffdfa;
+  --surface-2:#efe6d8;
+  --surface-3:#e5d9c6;
+  --border:#ddccb2;
+  --ink:#241e15;
+  --ink-soft:#5a4d3b;
+  --muted:#8a7a61;
+  --accent:#a85527;
+  --accent-ink:#fff8f0;
+  --accent-soft:#f1ded0;
+  --gold:#8a6a1f;
+  --gold-soft:#f2e6c4;
+  --silver:#4f6672;
+  --silver-soft:#e2ebee;
+  --good:#3d7a4e;
+  --good-soft:#e2eee2;
+  --danger:#9c3b2c;
+  --danger-soft:#f3e1db;
+  --warn:#93650f;
+  --warn-soft:#f6e9c8;
+  --focus:#a85527;
+  --shadow: 0 1px 2px rgba(36,30,21,.06), 0 8px 24px -12px rgba(36,30,21,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#17140f; --surface:#211c15; --surface-2:#2a2319; --surface-3:#362d1f; --border:#463a26;
+    --ink:#f3ecdd; --ink-soft:#cdbfa2; --muted:#94856a;
+    --accent:#e08a54; --accent-ink:#221408; --accent-soft:#3a2416;
+    --gold:#d8b45c; --gold-soft:#382f14;
+    --silver:#9db3bf; --silver-soft:#1c2a30;
+    --good:#7cc492; --good-soft:#193321;
+    --danger:#e3927e; --danger-soft:#3a1e18;
+    --warn:#e0b84f; --warn-soft:#3a2e10;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#17140f; --surface:#211c15; --surface-2:#2a2319; --surface-3:#362d1f; --border:#463a26;
+  --ink:#f3ecdd; --ink-soft:#cdbfa2; --muted:#94856a;
+  --accent:#e08a54; --accent-ink:#221408; --accent-soft:#3a2416;
+  --gold:#d8b45c; --gold-soft:#382f14;
+  --silver:#9db3bf; --silver-soft:#1c2a30;
+  --good:#7cc492; --good-soft:#193321;
+  --danger:#e3927e; --danger-soft:#3a1e18;
+  --warn:#e0b84f; --warn-soft:#3a2e10;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',ui-sans-serif,system-ui,sans-serif;font-size:14px;line-height:1.5}
+h1,h2,h3{text-wrap:balance}
+::selection{background:var(--accent-soft)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.serif{font-family:'Source Serif 4',Georgia,serif}
+
+header.top{
+  position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+  padding:14px clamp(14px,3vw,32px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.brand{display:flex;flex-direction:column;gap:2px;min-width:240px}
+.brand .eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.brand h1{margin:0;font-size:19px;font-weight:700;font-family:'Source Serif 4',serif;letter-spacing:.01em}
+.brand .metals{display:inline-flex;gap:6px;margin-top:2px}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:99px;letter-spacing:.02em}
+.tag.cu{background:var(--accent-soft);color:var(--accent)}
+.tag.au{background:var(--gold-soft);color:var(--gold)}
+.tag.ag{background:var(--silver-soft);color:var(--silver)}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}
+button.btn{
+  font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;border:1px solid var(--border);
+  background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;box-shadow:var(--shadow);transition:transform .08s ease, border-color .15s ease;
+}
+button.btn:hover{border-color:var(--accent)}
+button.btn:active{transform:translateY(1px)}
+button.btn.ghost{box-shadow:none}
+button.btn.small{padding:5px 10px;font-size:12px}
+
+.app{max-width:1320px;margin:0 auto;padding:20px clamp(14px,3vw,32px) 80px}
+.app-grid{display:grid;grid-template-columns:minmax(300px,360px) 1fr;gap:20px;align-items:start}
+@media (max-width:920px){.app-grid{grid-template-columns:1fr}}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.panel-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.panel-head h2{margin:0;font-size:15px;font-weight:700;font-family:'Source Serif 4',serif}
+.panel-head .hint{font-size:11.5px;color:var(--muted)}
+.panel-body{padding:14px 16px}
+
+#params-panel{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+
+details.acc{border-bottom:1px solid var(--border)}
+details.acc:last-child{border-bottom:none}
+details.acc summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:13px;color:var(--ink-soft);user-select:none}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary .chev{transition:transform .15s ease;color:var(--muted);font-size:12px}
+details.acc[open] summary .chev{transform:rotate(90deg)}
+details.acc summary:hover{color:var(--ink)}
+.acc-body{padding:2px 16px 16px}
+.acc-note{font-size:11.5px;color:var(--muted);margin:0 0 10px;line-height:1.45}
+
+.field{display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+.field label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.field input[type=text],.field input[type=number]{
+  font:inherit;font-family:'IBM Plex Mono',monospace;font-size:13px;padding:7px 9px;border:1px solid var(--border);
+  border-radius:7px;background:var(--surface-2);color:var(--ink);width:100%;
+}
+.field input:focus{background:var(--surface)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.field-row.three{grid-template-columns:1fr 1fr 1fr}
+.subhead{font-size:12px;font-weight:700;color:var(--ink);margin:14px 0 8px;padding-top:10px;border-top:1px dashed var(--border)}
+.subhead:first-child{border-top:none;padding-top:0;margin-top:2px}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tile{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:12px 13px;display:flex;flex-direction:column;gap:3px;min-height:78px;justify-content:center}
+.tile .k{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.tile .v{font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:600;color:var(--ink)}
+.tile .v small{font-size:12px;font-weight:500;color:var(--muted)}
+.tile .sub{font-size:11px;color:var(--muted);line-height:1.35}
+.tile.accent{background:var(--accent-soft);border-color:transparent}
+.tile.accent .v{color:var(--accent)}
+.tile.gold-t{background:var(--gold-soft);border-color:transparent}
+.tile.gold-t .v{color:var(--gold)}
+.tile.silver-t{background:var(--silver-soft);border-color:transparent}
+.tile.silver-t .v{color:var(--silver)}
+.tile.good{background:var(--good-soft);border-color:transparent}
+.tile.good .v{color:var(--good)}
+.tile.danger{background:var(--danger-soft);border-color:transparent}
+.tile.danger .v{color:var(--danger)}
+.tile.warn{background:var(--warn-soft);border-color:transparent}
+.tile.warn .v{color:var(--warn)}
+.tile.big{grid-column:span 2}
+@media (max-width:520px){.tile.big{grid-column:span 1}}
+
+.warnbox{
+  background:var(--warn-soft);border:1px solid color-mix(in srgb, var(--warn) 45%, var(--border));
+  border-radius:10px;padding:11px 13px;font-size:12.5px;line-height:1.55;color:var(--ink-soft);margin-bottom:14px;
+}
+.warnbox b{color:var(--warn)}
+.warnbox a{color:var(--accent)}
+.warnbox ul{margin:6px 0 0;padding-left:18px}
+
+.verdict{
+  border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;
+  border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.verdict.win-directo{background:var(--good-soft)}
+.verdict.win-enami{background:var(--accent-soft)}
+.verdict.rejected{background:var(--danger-soft)}
+.verdict .headline{font-family:'Source Serif 4',serif;font-size:20px;font-weight:700}
+.verdict .sub{font-size:12.5px;color:var(--ink-soft)}
+
+.storage-note{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.storage-note .dot{width:6px;height:6px;border-radius:99px;background:var(--good)}
+.small-note{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+
+table.src{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0 4px}
+table.src th,table.src td{border:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top}
+table.src th{background:var(--surface-2);font-size:10.5px;text-transform:uppercase;letter-spacing:.02em}
+
+@media print{
+  .no-print{display:none !important}
+  header.top{position:static;backdrop-filter:none}
+  .app-grid{display:block}
+  body{background:#fff;font-size:12px}
+}
+</style>
+
+<header class="top">
+  <div class="brand">
+    <span class="eyebrow">Modelo Copiapó · borrador de trabajo</span>
+    <h1>Comparador: comprador directo vs. ENAMI</h1>
+    <span class="metals">
+      <span class="tag cu">Cu %</span>
+      <span class="tag au">Au g/t</span>
+      <span class="tag ag">Ag g/t</span>
+    </span>
+  </div>
+  <div class="top-actions no-print">
+    <button class="btn ghost small" id="btn-reset" title="Restablecer valores por defecto">↺ Restablecer</button>
+    <button class="btn" id="btn-print">🖨 Imprimir / Guardar PDF</button>
+  </div>
+</header>
+
+<div class="app">
+  <p class="small-note no-print" style="margin:-4px 0 18px;max-width:74ch">
+    Calcula el valor bruto de un despacho de mineral (cobre + oro, opcionalmente plata) vendido a un
+    <strong>comprador directo</strong> (mismo cálculo que el ejemplo de 500 t al 0,8% Cu / 0,5 g/t Au) y lo
+    compara contra una <strong>estimación de lo que pagaría ENAMI</strong> según su fórmula pública de tarifas.
+    Borrador de trabajo, no constituye asesoría comercial ni legal.
+  </p>
+
+  <div class="warnbox no-print">
+    ⚠️ <b>Los campos de la tarifa ENAMI (tramo Cu, maquila, ley mínima) vienen con valores de ejemplo, no con la
+    tarifa oficial de septiembre 2026.</b> Este entorno no tiene acceso a internet completo, así que no pude
+    descargar el PDF de tarifas de <span class="mono">enami.cl</span> para leer las cifras exactas del mes.
+    Lo que sí pude confirmar por fuentes públicas:
+    <ul>
+      <li>ENAMI publica una tarifa mensual nueva cada mes en
+        <span class="mono">enami.cl/EnamiTransparente/B_HistoricoTarifas/</span> (constante en US$ durante el mes).</li>
+      <li>La ley mínima de recepción en sus Puntos de Compra con planta propia es <b>0,8% CuS</b> — ya cargada abajo.</li>
+      <li>La fórmula base que usan es <span class="mono">Valor Cu (US$/TMS) = Precio Cu (US$/lb) × 2.204,6223 × ley Cu × recuperación metalúrgica</span>,
+        la misma lógica que aplica este comparador.</li>
+      <li>Al último mes que encontré con PDF publicado fue agosto 2026
+        (<a href="https://www.enami.cl/EnamiTransparente/B_HistoricoTarifas/08tarago26.pdf" target="_blank" rel="noopener">08tarago26.pdf</a>);
+        no logré confirmar si septiembre 2026 ya estaba publicado.</li>
+    </ul>
+    Abre ese enlace (o la tarifa de septiembre si ya salió) y reemplaza <b>recuperación, maquila y castigos</b>
+    en el panel "Tarifa ENAMI" con los valores reales — el resto del cálculo se actualiza solo.
+  </div>
+
+  <div class="app-grid">
+    <!-- ================= LEFT: PARAMETER PANEL ================= -->
+    <aside class="panel no-print" id="params-panel">
+      <div class="panel-head"><h2>Parámetros</h2></div>
+
+      <details class="acc" open>
+        <summary>Despacho <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <div class="field"><label>Tonelaje (TMS)</label><input type="number" step="1" data-path="despacho.toneladas"></div>
+          <div class="field-row three">
+            <div class="field"><label>Ley Cu (%)</label><input type="number" step="0.01" data-path="despacho.leyCu"></div>
+            <div class="field"><label>Ley Au (g/t)</label><input type="number" step="0.01" data-path="despacho.leyAu"></div>
+            <div class="field"><label>Ley Ag (g/t)</label><input type="number" step="0.01" data-path="despacho.leyAg"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>Precios de mercado <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Se usan para ambos escenarios. Verifica la cotización vigente antes de decidir.</p>
+          <div class="field"><label>Cobre (US$/lb)</label><input type="number" step="0.01" data-path="precios.cu"></div>
+          <div class="field"><label>Oro (US$/oz troy)</label><input type="number" step="1" data-path="precios.au"></div>
+          <div class="field"><label>Plata (US$/oz troy)</label><input type="number" step="0.01" data-path="precios.ag"></div>
+          <div class="field"><label>Fecha de referencia</label><input type="text" data-path="precios.fecha"></div>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>Comprador directo <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Valor bruto = precio de mercado × ley × recuperación pactada, sin descuentos —
+          igual que el ejemplo de la cotización por WhatsApp.</p>
+          <div class="field-row three">
+            <div class="field"><label>Recup. Cu (%)</label><input type="number" step="0.1" data-path="directo.recCu"></div>
+            <div class="field"><label>Recup. Au (%)</label><input type="number" step="0.1" data-path="directo.recAu"></div>
+            <div class="field"><label>Recup. Ag (%)</label><input type="number" step="0.1" data-path="directo.recAg"></div>
+          </div>
+          <div class="field"><label>Maquila / descuentos (US$/TMS)</label><input type="number" step="0.1" data-path="directo.maquila"></div>
+        </div>
+      </details>
+
+      <details class="acc" open>
+        <summary>Tarifa ENAMI (estimada) <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <p class="acc-note">Mismos precios de mercado de arriba. Reemplaza estos valores con los de la tarifa
+          vigente — ver aviso al inicio de la página.</p>
+          <div class="field"><label>Ley mínima de recepción Cu (%)</label><input type="number" step="0.01" data-path="enami.leyMinCu"></div>
+          <div class="field-row three">
+            <div class="field"><label>Recup. Cu (%)</label><input type="number" step="0.1" data-path="enami.recCu"></div>
+            <div class="field"><label>Recup. Au (%)</label><input type="number" step="0.1" data-path="enami.recAu"></div>
+            <div class="field"><label>Recup. Ag (%)</label><input type="number" step="0.1" data-path="enami.recAg"></div>
+          </div>
+          <div class="field"><label>Maquila / tratamiento (US$/TMS)</label><input type="number" step="0.1" data-path="enami.maquila"></div>
+          <div class="field"><label>Castigos adicionales (US$/TMS)</label><input type="number" step="0.1" data-path="enami.castigo"></div>
+          <div class="field-row">
+            <div class="field"><label>Ley mín. pagable Au (g/t)</label><input type="number" step="0.01" data-path="enami.leyMinAu"></div>
+            <div class="field"><label>Ley mín. pagable Ag (g/t)</label><input type="number" step="0.01" data-path="enami.leyMinAg"></div>
+          </div>
+        </div>
+      </details>
+    </aside>
+
+    <!-- ================= RIGHT: RESULTS ================= -->
+    <main style="display:flex;flex-direction:column;gap:20px">
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Comprador directo</h2>
+          <span class="storage-note no-print"><span class="dot"></span>Guardado en este navegador</span>
+        </div>
+        <div class="panel-body">
+          <div class="tiles" id="tiles-directo"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>ENAMI (estimado)</h2>
+          <span class="hint">Ver aviso — verifica contra tarifa oficial del mes</span>
+        </div>
+        <div class="panel-body">
+          <div class="tiles" id="tiles-enami"></div>
+        </div>
+      </section>
+
+      <div id="verdict-box"></div>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Cómo se calcula</h2></div>
+        <div class="panel-body">
+          <p class="acc-note" style="margin-bottom:10px">
+            Valor Cu (US$/TMS) = precio Cu (US$/lb) × 2.204,6223 × (ley Cu/100) × (recuperación/100).
+            Valor Au o Ag (US$/TMS) = precio (US$/oz) / 31,1034768 × ley (g/t) × (recuperación/100), solo si la
+            ley supera la ley mínima pagable de esa tabla. El total de cada escenario resta maquila y castigos
+            por tonelada. Si la ley de Cu del despacho es menor que la ley mínima de recepción de ENAMI, ese
+            escenario se marca como rechazo.
+          </p>
+          <table class="src">
+            <tr><th>Dato</th><th>Fuente</th></tr>
+            <tr><td>Fórmula de valorización del cobre</td><td>SONAMI, cálculo de tarifas ENAMI (búsqueda pública)</td></tr>
+            <tr><td>Ley mínima 0,8% CuS en Puntos de Compra con planta propia</td><td>SONAMI / tarifas ENAMI (búsqueda pública)</td></tr>
+            <tr><td>Recuperación, maquila y castigos de ENAMI</td><td><b>sin verificar</b> — valores de ejemplo, reemplázalos</td></tr>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const TROY_OZ_G = 31.1034768;
+const LB_PER_T = 2204.62262185;
+const STORAGE_KEY = "comparador-enami-v1";
+
+function defaultState(){
+  return {
+    despacho:{ toneladas:500, leyCu:0.8, leyAu:0.5, leyAg:0 },
+    precios:{ cu:6.45, au:4318.88, ag:52, fecha:"11-09-2026" },
+    directo:{ recCu:80, recAu:80, recAg:80, maquila:0 },
+    enami:{ leyMinCu:0.8, recCu:82, recAu:70, recAg:70, maquila:30, castigo:0, leyMinAu:0, leyMinAg:0 }
+  };
+}
+
+let state = loadState();
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    return deepMerge(defaultState(), parsed);
+  }catch(e){ return defaultState(); }
+}
+function deepMerge(base, over){
+  if(Array.isArray(base)) return Array.isArray(over) ? over : base;
+  if(typeof base === "object" && base !== null){
+    const out = {...base};
+    if(over && typeof over === "object"){
+      for(const k in base) if(k in over) out[k] = deepMerge(base[k], over[k]);
+    }
+    return out;
+  }
+  return (over === undefined) ? base : over;
+}
+function save(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+function getPath(obj, path){ return path.split(".").reduce((o,k)=> (o==null?o:o[k]), obj); }
+function setPath(obj, path, value){
+  const keys = path.split(".");
+  let o = obj;
+  for(let i=0;i<keys.length-1;i++) o = o[keys[i]];
+  o[keys[keys.length-1]] = value;
+}
+
+function fmt(n, min, max){
+  if(min===undefined) min=2; if(max===undefined) max=min;
+  n = isFinite(n) ? n : 0;
+  return n.toLocaleString("es-CL",{minimumFractionDigits:min, maximumFractionDigits:max});
+}
+function usd(n){ return "US$ " + fmt(n,2); }
+function usd0(n){ return "US$ " + fmt(n,0); }
+
+/* ---------- calculations ---------- */
+function metalValues(d, recCu, recAu, recAg, leyMinAu, leyMinAg){
+  const cuFrac = (d.leyCu||0)/100 * (recCu||0)/100;
+  const valueCu = cuFrac * LB_PER_T * state.precios.cu;
+
+  const auPayable = (d.leyAu||0) >= (leyMinAu||0);
+  const valueAu = auPayable ? (d.leyAu||0) * (recAu||0)/100 / TROY_OZ_G * state.precios.au : 0;
+
+  const agPayable = (d.leyAg||0) >= (leyMinAg||0);
+  const valueAg = agPayable ? (d.leyAg||0) * (recAg||0)/100 / TROY_OZ_G * state.precios.ag : 0;
+
+  return { valueCu, valueAu, valueAg, auPayable, agPayable };
+}
+
+function calc(){
+  const d = state.despacho, t = d.toneladas||0;
+
+  const dir = state.directo;
+  const mDir = metalValues(d, dir.recCu, dir.recAu, dir.recAg, 0, 0);
+  const perTDirecto = mDir.valueCu + mDir.valueAu + mDir.valueAg - (dir.maquila||0);
+  const totalDirecto = perTDirecto * t;
+
+  const en = state.enami;
+  const rejected = (d.leyCu||0) < (en.leyMinCu||0);
+  const mEn = metalValues(d, en.recCu, en.recAu, en.recAg, en.leyMinAu, en.leyMinAg);
+  const perTEnami = rejected ? 0 : (mEn.valueCu + mEn.valueAu + mEn.valueAg - (en.maquila||0) - (en.castigo||0));
+  const totalEnami = perTEnami * t;
+
+  const diff = totalDirecto - totalEnami;
+  const diffPct = totalEnami !== 0 ? (diff/Math.abs(totalEnami))*100 : (totalDirecto>0?100:0);
+
+  return { t, mDir, perTDirecto, totalDirecto, mEn, perTEnami, totalEnami, rejected, diff, diffPct };
+}
+
+/* ---------- render ---------- */
+function renderDirecto(c){
+  const d = state.despacho;
+  document.getElementById("tiles-directo").innerHTML = `
+    <div class="tile accent">
+      <span class="k">Cobre pagable</span>
+      <span class="v">${usd0(c.mDir.valueCu*c.t)}</span>
+      <span class="sub">${fmt(d.leyCu*(state.directo.recCu/100)*c.t/100,2,2)} t Cu @ ${usd(state.precios.cu)}/lb</span>
+    </div>
+    <div class="tile gold-t">
+      <span class="k">Oro pagable</span>
+      <span class="v">${usd0(c.mDir.valueAu*c.t)}</span>
+      <span class="sub">${fmt(d.leyAu*(state.directo.recAu/100)*c.t,0,0)} g Au @ ${usd0(state.precios.au)}/oz</span>
+    </div>
+    ${d.leyAg>0 ? `
+    <div class="tile silver-t">
+      <span class="k">Plata pagable</span>
+      <span class="v">${usd0(c.mDir.valueAg*c.t)}</span>
+      <span class="sub">${fmt(d.leyAg*(state.directo.recAg/100)*c.t,0,0)} g Ag @ ${usd(state.precios.ag)}/oz</span>
+    </div>` : ``}
+    <div class="tile big good">
+      <span class="k">Valor bruto del despacho</span>
+      <span class="v">${usd0(c.totalDirecto)}</span>
+      <span class="sub">${fmt(c.perTDirecto,2,2)} US$/TMS × ${fmt(c.t,0,0)} TMS${state.directo.maquila>0?` (maquila ${usd(state.directo.maquila)}/TMS ya restada)`:""}</span>
+    </div>
+  `;
+}
+
+function renderEnami(c){
+  const d = state.despacho, en = state.enami;
+  if(c.rejected){
+    document.getElementById("tiles-enami").innerHTML = `
+      <div class="tile big danger">
+        <span class="k">Resultado</span>
+        <span class="v" style="font-size:16px">Bajo ley mínima de recepción</span>
+        <span class="sub">Ley Cu ${fmt(d.leyCu,2,2)}% &lt; ${fmt(en.leyMinCu,2,2)}% mínimo declarado para Puntos de Compra con planta propia</span>
+      </div>`;
+    return;
+  }
+  document.getElementById("tiles-enami").innerHTML = `
+    <div class="tile accent">
+      <span class="k">Cobre pagable</span>
+      <span class="v">${usd0(c.mEn.valueCu*c.t)}</span>
+      <span class="sub">recuperación ${fmt(en.recCu,1,1)}%</span>
+    </div>
+    <div class="tile gold-t">
+      <span class="k">Oro pagable</span>
+      <span class="v">${usd0(c.mEn.valueAu*c.t)}</span>
+      <span class="sub">${c.mEn.auPayable ? `recuperación ${fmt(en.recAu,1,1)}%` : `bajo ley mínima pagable (${fmt(en.leyMinAu,2,2)} g/t)`}</span>
+    </div>
+    ${d.leyAg>0 ? `
+    <div class="tile silver-t">
+      <span class="k">Plata pagable</span>
+      <span class="v">${usd0(c.mEn.valueAg*c.t)}</span>
+      <span class="sub">${c.mEn.agPayable ? `recuperación ${fmt(en.recAg,1,1)}%` : `bajo ley mínima pagable (${fmt(en.leyMinAg,2,2)} g/t)`}</span>
+    </div>` : ``}
+    <div class="tile">
+      <span class="k">Maquila + castigos</span>
+      <span class="v">${usd(en.maquila + en.castigo)} <small>/TMS</small></span>
+      <span class="sub">restados del valor de metal pagable</span>
+    </div>
+    <div class="tile big warn">
+      <span class="k">Valor neto estimado ENAMI</span>
+      <span class="v">${usd0(c.totalEnami)}</span>
+      <span class="sub">${fmt(c.perTEnami,2,2)} US$/TMS × ${fmt(c.t,0,0)} TMS — cifra de ejemplo, ver aviso</span>
+    </div>
+  `;
+}
+
+function renderVerdict(c){
+  const box = document.getElementById("verdict-box");
+  if(c.rejected){
+    box.innerHTML = `
+      <div class="verdict rejected">
+        <span class="headline">ENAMI no recibiría este despacho en sus Puntos de Compra propios</span>
+        <span class="sub">La venta directa queda en ${usd0(c.totalDirecto)} bruto. Compara igualmente contra una
+        planta de terceros de ENAMI o ajusta la ley mínima si tu punto de venta es distinto.</span>
+      </div>`;
+    return;
+  }
+  const better = c.diff >= 0 ? "directo" : "enami";
+  const cls = better === "directo" ? "win-directo" : "win-enami";
+  const who = better === "directo" ? "el comprador directo" : "ENAMI";
+  box.innerHTML = `
+    <div class="verdict ${cls}">
+      <span class="headline">Conviene más ${who} — diferencia de ${usd0(Math.abs(c.diff))} (${fmt(Math.abs(c.diffPct),1,1)}%)</span>
+      <span class="sub">Directo: ${usd0(c.totalDirecto)} · ENAMI (estimado): ${usd0(c.totalEnami)}. La cifra de
+      ENAMI depende de los valores de ejemplo en "Tarifa ENAMI" — actualízalos con la tarifa oficial antes de decidir.</span>
+    </div>`;
+}
+
+function update(){
+  const c = calc();
+  renderDirecto(c);
+  renderEnami(c);
+  renderVerdict(c);
+}
+
+/* ---------- field binding ---------- */
+function bindFields(){
+  document.querySelectorAll("[data-path]").forEach(el => {
+    const val = getPath(state, el.dataset.path);
+    el.value = val === undefined || val === null ? "" : val;
+    el.addEventListener("input", () => {
+      const v = el.type === "number" ? (parseFloat(el.value) || 0) : el.value;
+      setPath(state, el.dataset.path, v);
+      save(); update();
+    });
+  });
+}
+function repopulateFields(){
+  document.querySelectorAll("[data-path]").forEach(el => {
+    const val = getPath(state, el.dataset.path);
+    el.value = val === undefined || val === null ? "" : val;
+  });
+}
+
+document.getElementById("btn-print").addEventListener("click", () => window.print());
+document.getElementById("btn-reset").addEventListener("click", () => {
+  if(!confirm("¿Restablecer todos los valores por defecto? Se perderá lo editado en este navegador.")) return;
+  try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+  state = defaultState();
+  repopulateFields();
+  update();
+});
+
+bindFields();
+update();
+})();
+</script>
